@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
-import logo from './assets/logo.png';
+import logo from './assets/logo.svg';
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
