@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import './Dashboard.css';
+import './AdministratorDashboard.css';
 import logo from './assets/logo.svg';
 import { useNavigate } from "react-router-dom";
 
-function Dashboard() {
+function AdministratorDashboard() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -22,9 +18,8 @@ function Dashboard() {
       <nav className="dashboard-navbar">
         <div className="navbar-left">
           <img src={logo} alt="UltimateEV Logo" className="navbar-logo" />
-          <span className="navbar-school-name">Your School</span>
+          <span className="navbar-school-name">Administrator</span>
         </div>
-
         <div className="navbar-right">
           <button className="profile-button" onClick={toggleDropdown}>
             Profile
@@ -32,19 +27,16 @@ function Dashboard() {
           </button>
           {dropdownOpen && (
             <div className="dropdown-menu">
-              <button className="dropdown-item">School Profile</button>
-              <button className="dropdown-item">Change Password</button>
               <button className="dropdown-item" onClick={handleLogout}>Log out</button>
             </div>
           )}
         </div>
       </nav>
-
       <main className="dashboard-main">
-        <h1>Your school's live sustainability statistics</h1>
+        <h1>Admin dashboard</h1>
       </main>
     </div>
   );
 }
 
-export default Dashboard;
+export default AdministratorDashboard;
