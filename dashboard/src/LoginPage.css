@@ -1,0 +1,103 @@
+/* LoginPage.css */
+
+.login-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 420px;
+  background-color: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Header with light grey background */
+.login-header {
+  background-color: #f0f0f0;
+  padding: 24px;
+  text-align: center;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  color: #4d4d4b;
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #599b4a;
+}
+
+/* Form layout */
+.login-form {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.login-label {
+  font-weight: bold;
+  color: #4d4d4b;
+}
+
+.login-input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.login-input:focus {
+  border-color: #599b4a;
+  outline: none;
+}
+
+/* Updated dark green login button */
+.login-button {
+  background-color: #599b4a;
+  color: white;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #4a823e;
+  transform: scale(1.04);
+}
+
+/* Forgot password styling */
+.forgot-password {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #007bff;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
