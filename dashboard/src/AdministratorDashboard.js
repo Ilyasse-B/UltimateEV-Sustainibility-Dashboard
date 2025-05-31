@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './AdministratorDashboard.css';
 import logo from './assets/logo.svg';
+import CreateSchool from './CreateSchool';
 import { useNavigate } from "react-router-dom";
 
 function AdministratorDashboard() {
@@ -8,6 +9,14 @@ function AdministratorDashboard() {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+  const [showCreateSchool, setShowCreateSchool] = useState(false);
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
   const handleLogout = () => {
     localStorage.clear();
@@ -20,6 +29,45 @@ function AdministratorDashboard() {
       .then(data => setUsers(data))
       .catch(err => console.error("Failed to fetch users", err));
   }, []);
+
+  const handleSubmit = async () => {
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    const submissionData = new FormData();
+    submissionData.append('username', formData.username);
+    submissionData.append('email', formData.email);
+    submissionData.append('password', formData.password);
+
+    const res = await fetch('/api/create_admin.php', {
+      method: 'POST',
+      body: submissionData
+    });
+    
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (err) {
+      console.error("Invalid JSON response", text);
+      alert("Server error");
+      return;
+    }
+
+    if (data.success) {
+      alert("Admin user created successfully");
+      setFormData({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      });
+    } else {
+      alert("Failed to create admin: " + (data.error || "Unknown error"));
+    }
+  };
 
   return (
     <div className="dashboard-wrapper">
@@ -40,6 +88,7 @@ function AdministratorDashboard() {
           )}
         </div>
       </nav>
+
       <main className="dashboard-main">
         <div className="admin-table-container">
           <h2>Manage Users</h2>
@@ -74,7 +123,22 @@ function AdministratorDashboard() {
             </tbody>
           </table>
         </div>
+
+        <div className="admin-actions">
+          <button className="action-button" onClick={() => setShowCreateSchool(true)}>Create School</button>
+          <button className="action-button">Create Trust</button>
+        </div>
+
+        <div className="admin-form-container">
+          <h2>Create Admin User</h2>
+          <input type="text" placeholder="Username" value={formData.username} onChange={e => setFormData({ ...formData, username: e.target.value })} />
+          <input type="email" placeholder="Email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
+          <input type="password" placeholder="Password" value={formData.password} onChange={e => setFormData({ ...formData, password: e.target.value })} />
+          <input type="password" placeholder="Confirm Password" value={formData.confirmPassword} onChange={e => setFormData({ ...formData, confirmPassword: e.target.value })} />
+          <button className="table-button" onClick={handleSubmit}>Create Admin</button>
+        </div>
       </main>
+      {showCreateSchool && <CreateSchool onClose={() => setShowCreateSchool(false)} />}
     </div>
   );
 }
