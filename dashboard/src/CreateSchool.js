@@ -21,6 +21,9 @@ const CreateSchool = ({ onClose }) => {
     submissionData.append('email', formData.email);
     submissionData.append('password', formData.password);
     submissionData.append('school_name', formData.school_name);
+    if (formData.logo) {
+      submissionData.append('logo', formData.logo);
+    }
 
     const res = await fetch('/api/create_school_user.php', {
       method: 'POST',
@@ -54,6 +57,7 @@ const CreateSchool = ({ onClose }) => {
         <input type="password" placeholder="Password" onChange={e => setFormData({ ...formData, password: e.target.value })} />
         <input type="password" placeholder="Confirm Password" onChange={e => setFormData({ ...formData, confirmPassword: e.target.value })} />
         <input type="text" placeholder="School Name" onChange={e => setFormData({ ...formData, school_name: e.target.value })} />
+        <input type="file" accept="image/*" onChange={e => setFormData({ ...formData, logo: e.target.files[0] })} />
         <button className="submit-button" onClick={handleSubmit}>Create School</button>
       </div>
     </div>
