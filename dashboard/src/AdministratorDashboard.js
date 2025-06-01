@@ -114,8 +114,8 @@ function AdministratorDashboard() {
                     </button>
                   </td>
                   <td>
-                    <span className={`role-label ${user.is_admin ? 'admin' : 'user'}`}>
-                      {user.is_admin ? 'Admin' : 'User'}
+                    <span className={`role-label ${parseInt(user.is_admin) === 1 ? 'admin' : 'user'}`}>
+                      {parseInt(user.is_admin) === 1 ? 'Admin' : 'User'}
                     </span>
                   </td>
                 </tr>
